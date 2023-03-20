@@ -6,3 +6,7 @@ New Photo booth that send email vs Tweet For Maker Faire Miami 2023
 pip install picamera  <br/>
 sudo apt-get install python3-tk  <br/>
 sudo apt-get install python3-pil python3-pil.imagetk <br/>
+
+Useful links 
+https://picamera.readthedocs.io/en/release-1.13/recipes1.html?highlight=text#overlaying-text-on-the-output
+
