@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import time
 import picamera
 import smtplib
@@ -26,6 +27,7 @@ def capture_images(num_images):
         #play with low light
     
         camera.start_preview()
+        camera.annotate_text_size = 120
 
         # Add a brief delay to allow the camera to adjust to lighting
         time.sleep(2)
@@ -35,10 +37,11 @@ def capture_images(num_images):
             for countdown in [3, 2, 1]:
                 camera.annotate_text = str(countdown)
                 time.sleep(1)
-            camera.annotate_text = ''
+            camera.annotate_text = 'Miami Maker Faire 2023'
             image_file = f'image{i}.jpg'
             camera.capture(image_file)
             image_files.append(image_file)
+            camera.annotate_text = ''
     return image_files
 
 def send_email(recipient_email, image_files):
@@ -103,18 +106,22 @@ label_image.pack(pady=10)
 # Create a label widget with the text "Recipient Email:"
 label_email = tk.Label(window, text='Enter up to 4 Emails seperated by comas click Send Email step back take some Pics:', font=('Helvetica',15,'bold'))
 label_email.pack(fill=tk.BOTH, expand=True, anchor=tk.CENTER)
+label_email = tk.Label(window, text='example@test.com,Woody@toystory.com', font=('Helvetica',15,'bold'))
+label_email.pack(fill=tk.BOTH, expand=True, anchor=tk.CENTER)
 
 # Create an entry widget for the email input 
 entry_email = tk.Entry(window)
-entry_email.pack(fill=tk.BOTH, expand=True, anchor=tk.CENTER)
+entry_email.pack(padx=20, pady=20,fill=tk.BOTH, expand=False, anchor=tk.CENTER)
 
 # Create a button widget to send the email
 button_send_email = tk.Button(window, text='Send Email', command=on_send_email)
-button_send_email.pack(pady=20, fill=tk.BOTH, expand=True, anchor=tk.CENTER)
+button_send_email.pack(padx=20, pady=20, fill=tk.BOTH, expand=True, anchor=tk.CENTER)
 
 # Set the window size and center it on the screen
 window.geometry('1024x768')
 window.eval('tk::PlaceWindow . center')
+
+
 
 
 # Start the main event loop
