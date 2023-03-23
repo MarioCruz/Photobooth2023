@@ -132,8 +132,8 @@ entry_email.pack(padx=40, pady=20,fill=tk.BOTH, expand=False, anchor=tk.CENTER)
 button_send_email = tk.Button(window, text='Send Email', font=('Helvetica', 15, 'bold'), command=on_send_email, bg='blue', fg='white')
 button_send_email.pack(padx=40, pady=20, fill=tk.BOTH, expand=True, anchor=tk.CENTER)
 
-# Bind the 'Return' key to the button's click function
-window.bind('<Return>', lambda event: button_send_email.invoke())
+# Bind the 'Return' key to the button's click function not sure I like this yet
+#window.bind('<Return>', lambda event: button_send_email.invoke())
 
 
 
