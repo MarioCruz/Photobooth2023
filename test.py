@@ -1,3 +1,5 @@
+# Test Adding Images as overlay 
+
 import time
 import picamera
 from PIL import Image
