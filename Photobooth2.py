@@ -62,7 +62,7 @@ def send_email(recipient_email, image_files):
     msg['Subject'] = 'Maker Faire  Booth Pictures'
 
     # Add a text message to the email body
-    body = 'Here are your Maker Faire 2023 pictures!'
+    body = 'Thanks for stopping by the Maker Faire Miami photo booth! We hope you enjoyed exploring all the amazing projects and ideas on display. As a special thankyou, we’re sending you a few of your favorite photos from the booth. Don’t forget to share your Maker Faire Miami experience with your friends and followers! Tag us in your posts using @makerfairemiam, #MFM2023 and #MakerFaireMiami, and show the world your love for creativity, innovation, and DIY projects.\nWe look forward to seeing you at the next Maker Faire Miami event!"'
     msg.attach(MIMEText(body))
 
     # Attach the captured images to the email
@@ -131,6 +131,10 @@ entry_email.pack(padx=40, pady=20,fill=tk.BOTH, expand=False, anchor=tk.CENTER)
 # Create a button widget to send the email
 button_send_email = tk.Button(window, text='Send Email', font=('Helvetica', 15, 'bold'), command=on_send_email, bg='blue', fg='white')
 button_send_email.pack(padx=40, pady=20, fill=tk.BOTH, expand=True, anchor=tk.CENTER)
+
+# Bind the 'Return' key to the button's click function
+window.bind('<Return>', lambda event: button_send_email.invoke())
+
 
 
 # Set the window size and center it on the screen
