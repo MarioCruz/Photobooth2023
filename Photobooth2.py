@@ -1,5 +1,6 @@
 #! /usr/bin/python3
 import time
+from datetime import date
 import picamera
 import smtplib
 from email.mime.image import MIMEImage
@@ -39,7 +40,9 @@ def capture_images(num_images):
                 camera.annotate_text = str(countdown)
                 time.sleep(1)
             camera.annotate_text = ''
-            image_file = f'image{i}.jpg'
+            # Set the file name to "MakerFaire" and append the current date
+            today = date.today().strftime("%Y-%m-%d")
+            image_file = f'MakerFaire_{today}_{i}.jpg'
             camera.capture(image_file)
             image_files.append(image_file)
             camera.annotate_text = ''
@@ -59,16 +62,25 @@ def send_email(recipient_email, image_files):
     msg = MIMEMultipart()
     msg['From'] = sender_email
     msg['To'] = recipient_email
-    msg['Subject'] = 'Maker Faire  Booth Pictures'
+    msg['Subject'] = 'Maker Faire Booth Pictures'
 
-    # Add a text message to the email body
-    body = 'Thanks for stopping by the Maker Faire Miami photo booth! We hope you enjoyed exploring all the amazing projects and ideas on display. As a special thankyou, we’re sending you a few of your favorite photos from the booth. Don’t forget to share your Maker Faire Miami experience with your friends and followers! Tag us in your posts using @makerfairemiam, #MFM2023 and #MakerFaireMiami, and show the world your love for creativity, innovation, and DIY projects.\nWe look forward to seeing you at the next Maker Faire Miami event!"'
+    body = 'Thanks for stopping by the Maker Faire Miami photo booth! We hope you enjoyed exploring all the amazing projects and ideas on display. As a special thank you, we\’re sending you a few of your favorite photos from the booth. Don\’t forget to share your Maker Faire Miami experience with your friends and followers! Tag us in your posts using @makerfairemiami, #MFM2023 and #MakerFaireMiami, and show the world your love for creativity, innovation, and DIY projects. We look forward to seeing you at the next Maker Faire Miami event!\n'
     msg.attach(MIMEText(body))
 
-    # Attach the captured images to the email
+    # Attach the captured images to the email with their original file names
     for image_file in image_files:
         with open(image_file, 'rb') as f:
-            img = MIMEImage(f.read())
+            # Get the file extension from the image file name
+            file_ext = image_file.split('.')[-1]
+            # Set the image type based on the file extension
+            if file_ext.lower() == 'jpg':
+                img_type = 'jpeg'
+            else:
+                img_type = file_ext.lower()
+
+            # Create the MIMEImage object with the correct image type and original file name
+            img = MIMEImage(f.read(), _subtype=img_type)
+            img.add_header('Content-Disposition', 'attachment', filename=image_file)
             msg.attach(img)
 
     # Send the email using SMTP2GO
@@ -132,7 +144,7 @@ entry_email.pack(padx=40, pady=20,fill=tk.BOTH, expand=False, anchor=tk.CENTER)
 button_send_email = tk.Button(window, text='Send Email', font=('Helvetica', 15, 'bold'), command=on_send_email, bg='blue', fg='white')
 button_send_email.pack(padx=40, pady=20, fill=tk.BOTH, expand=True, anchor=tk.CENTER)
 
-# Bind the 'Return' key to the button's click function not sure I like this yet
+# Bind the 'Return' key to the button's click function
 #window.bind('<Return>', lambda event: button_send_email.invoke())
 
 
