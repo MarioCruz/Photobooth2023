@@ -42,7 +42,8 @@ def capture_images(num_images):
             camera.annotate_text = ''
             # Set the file name to "MakerFaire" and append the current date
             today = date.today().strftime("%Y-%m-%d")
-            image_file = f'MakerFaire_{today}_{i}.jpg'
+            image_file = f'pics/MakerFaire_{today}_{i}.jpg'
+            #image_file = f'MakerFaire_{today}_{i}.jpg'
             camera.capture(image_file)
             image_files.append(image_file)
             camera.annotate_text = ''
@@ -55,6 +56,7 @@ def capture_images(num_images):
 
             # Save the new photo with the logo
             photo.save(image_file)
+            
             
     return image_files
 
