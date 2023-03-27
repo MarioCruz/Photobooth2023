@@ -14,3 +14,4 @@ https://picamera.readthedocs.io/en/release-1.13/recipes1.html?highlight=text#ove
 You will need a Raspberry Pi have and a Camera conected
 
 ![pi-camera-attached](https://user-images.githubusercontent.com/1426877/227970625-08ccf26c-f8ca-4326-8524-e4d1b1b046fe.jpg)
+Photo from Raspberry Pi Foundation 
